@@ -12,10 +12,10 @@ I use the pygame library and it's the only library you need to install with <pre
 
 <h3>Parameters that can be changed include:</h3>
 
-+ Number of rows (NUMBER_OF_ROWS )
-+ Number of columns (NUMBER_OF_COLUMNS)
-+ Number of signs that need to be lined up to win (NUMBER_TO_WIN)
+  <li>Number of rows (NUMBER_OF_ROWS )</li>
+  <li>Number of columns (NUMBER_OF_COLUMNS)</li>
+  <li>Number of signs that need to be lined up to win (NUMBER_TO_WIN)</li>
 
 <h3>Optional:</h3>
-<li>And the size of each square (SIZE_OF_SINGLE_BOX)</li>
+  <li>And the size of each square (SIZE_OF_SINGLE_BOX)</li>
 
