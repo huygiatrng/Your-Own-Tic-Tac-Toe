@@ -6,7 +6,7 @@ If it were that simple, I would never have created this software. With only 3 ro
 As a Vietnamese, Tic-Tac-Toe has been associated with my childhood whenever I have free time in class. We need 5 marks to hit in order to win. Also, the number of rows and columns is also infinite (depending on the width of the page.) I was wondering why I didn't make a game where we can easily tweak those stats to fit. with different gameplay.
 
 So Tic-tac-toe Terminal was created when I was a student in 11th grade. It was quite inconvenient to display the game only on the terminal as well as the process of entering x, y positions to mark. After a long time, I seem to have forgotten it. But one day I realized I wanted to make it a real game, easily accessible to other players. And this is when I started creating this simple game.
-I use the pygame library and it's the only library you need to install with the "pip install pygame" command.
+I use the pygame library and it's the only library you need to install with the <pre>pip install pygame</pre> command.
 
 <h3>Parameters that can be changed include:</h3>
 
