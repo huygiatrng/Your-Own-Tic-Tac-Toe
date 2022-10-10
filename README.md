@@ -17,5 +17,5 @@ I use the pygame library and it's the only library you need to install with <pre
 + Number of signs that need to be lined up to win (NUMBER_TO_WIN)
 
 <h3>Optional:</h3>
-<li>+ And the size of each square (SIZE_OF_SINGLE_BOX)</li>
+<li>And the size of each square (SIZE_OF_SINGLE_BOX)</li>
 
