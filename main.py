@@ -125,18 +125,18 @@ def printWinner(winnerSign):
     playing = False
     gotWinner = True
     pg.draw.rect(screen, YELLOW,
-                 (0, int(dimension[1] / 3) + 5, dimension[0], int(dimension[0] * dimension[1] / 11000) + 3))
+                 (0, int(dimension[1] / 3) + 5, dimension[0], int(dimension[0] * dimension[1] / 15000) + 3))
     if (winnerSign == 0):
         winner = 0
-        screen.blit(render_border_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 11000)),
+        screen.blit(render_border_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000)),
                     (int(dimension[0] / 11) + 2, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 11000), 0),
+        screen.blit(render_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000), 0),
                     (int(dimension[0] / 11), int(dimension[1] / 3)))
     else:
         winner = 1
-        screen.blit(render_border_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 11000)),
+        screen.blit(render_border_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000)),
                     (int(dimension[0] / 12) + 3, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 11000), 1),
+        screen.blit(render_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000), 1),
                     (int(dimension[0] / 12), int(dimension[1] / 3)))
 
 
