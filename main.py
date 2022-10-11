@@ -1,10 +1,10 @@
 import pygame as pg
 
-NUMBER_OF_ROWS = 20
-NUMBER_OF_COLUMNS = 20
-NUMBER_TO_WIN = 5
+NUMBER_OF_ROWS = 10
+NUMBER_OF_COLUMNS = 15
+NUMBER_TO_WIN = 3
 FPS = 144
-SIZE_OF_SINGLE_BOX = 60
+SIZE_OF_SINGLE_BOX = 50
 
 board2d = t = [[-1] * NUMBER_OF_COLUMNS for i in range(NUMBER_OF_ROWS)]
 
@@ -25,6 +25,7 @@ GRASS = (55, 155, 65)
 PINK = (204, 0, 102)
 
 dimension = (NUMBER_OF_COLUMNS * SIZE_OF_SINGLE_BOX + 20, NUMBER_OF_ROWS * SIZE_OF_SINGLE_BOX + 50)
+area = dimension[0]*dimension[1]
 
 # initialize all imported pygame modules
 pg.init()
@@ -66,7 +67,7 @@ def check_value(x):
 
 
 def render_mark(string, size):
-    font = pg.font.SysFont('dejavuserif', size)
+    font = pg.font.SysFont('Cooper Black', size)
     if string == "X":
         return font.render(string, True, RED)
     elif string == "O":
@@ -125,18 +126,18 @@ def printWinner(winnerSign):
     playing = False
     gotWinner = True
     pg.draw.rect(screen, YELLOW,
-                 (0, int(dimension[1] / 3) + 5, dimension[0], int(dimension[0] * dimension[1] / 15000) + 3))
+                 (0, int(dimension[1] / 3)-dimension[1]/25, dimension[0], int(area / (area/80)) + 3))
     if (winnerSign == 0):
         winner = 0
-        screen.blit(render_border_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000)),
+        screen.blit(render_border_winner("PLAYER 1 WON!", int(area / (area/80))),
                     (int(dimension[0] / 11) + 2, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000), 0),
+        screen.blit(render_winner("PLAYER 1 WON!", int(area / (area/80)), 0),
                     (int(dimension[0] / 11), int(dimension[1] / 3)))
     else:
         winner = 1
-        screen.blit(render_border_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000)),
+        screen.blit(render_border_winner("PLAYER 2 WON!", int(area / (area/80))),
                     (int(dimension[0] / 12) + 3, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000), 1),
+        screen.blit(render_winner("PLAYER 2 WON!", int(area / (area/80)), 1),
                     (int(dimension[0] / 12), int(dimension[1] / 3)))
 
 
