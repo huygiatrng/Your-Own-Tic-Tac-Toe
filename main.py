@@ -1,10 +1,12 @@
+import time
+
 import pygame as pg
 
-NUMBER_OF_ROWS = 10
-NUMBER_OF_COLUMNS = 15
-NUMBER_TO_WIN = 3
+NUMBER_OF_ROWS = 20
+NUMBER_OF_COLUMNS = 20
+NUMBER_TO_WIN = 5
 FPS = 144
-SIZE_OF_SINGLE_BOX = 50
+SIZE_OF_SINGLE_BOX = 60
 
 board2d = t = [[-1] * NUMBER_OF_COLUMNS for i in range(NUMBER_OF_ROWS)]
 
@@ -25,7 +27,6 @@ GRASS = (55, 155, 65)
 PINK = (204, 0, 102)
 
 dimension = (NUMBER_OF_COLUMNS * SIZE_OF_SINGLE_BOX + 20, NUMBER_OF_ROWS * SIZE_OF_SINGLE_BOX + 50)
-area = dimension[0]*dimension[1]
 
 # initialize all imported pygame modules
 pg.init()
@@ -47,13 +48,13 @@ def drawMarks():
     for i in range(len(board2d)):
         for j in range(len(board2d[i])):
             if check_value(board2d[i][j]) == " X ":
-                screen.blit(render_mark("X", SIZE_OF_SINGLE_BOX - 3),
+                screen.blit(render_mark("X", SIZE_OF_SINGLE_BOX - 3,RED),
                             (originBoard[0] + j * SIZE_OF_SINGLE_BOX, originBoard[1] + i * SIZE_OF_SINGLE_BOX))
             elif check_value(board2d[i][j]) == " O ":
-                screen.blit(render_mark("O", SIZE_OF_SINGLE_BOX - 3),
+                screen.blit(render_mark("O", SIZE_OF_SINGLE_BOX - 3,BLUE),
                             (originBoard[0] + j * SIZE_OF_SINGLE_BOX, originBoard[1] + i * SIZE_OF_SINGLE_BOX))
             else:
-                screen.blit(render_mark(" ", SIZE_OF_SINGLE_BOX - 3),
+                screen.blit(render_mark(" ", SIZE_OF_SINGLE_BOX - 3,BLUE),
                             (originBoard[0] + j * SIZE_OF_SINGLE_BOX, originBoard[1] + i * SIZE_OF_SINGLE_BOX))
 
 
@@ -66,14 +67,12 @@ def check_value(x):
         return " X "
 
 
-def render_mark(string, size):
-    font = pg.font.SysFont('Cooper Black', size)
-    if string == "X":
-        return font.render(string, True, RED)
-    elif string == "O":
-        return font.render(string, True, BLUE)
+def render_mark(string, size,color):
+    font = pg.font.SysFont('dejavuserif', size)
+    if string == "X" or string =="O":
+        return font.render(string, True, color)
     else:
-        return font.render(string, True, BLUE)
+        return font.render(string, True, color)
 
 
 def render_winner(string, size, colorIndex):
@@ -126,18 +125,18 @@ def printWinner(winnerSign):
     playing = False
     gotWinner = True
     pg.draw.rect(screen, YELLOW,
-                 (0, int(dimension[1] / 3)-dimension[1]/25, dimension[0], int(area / (area/80)) + 3))
+                 (0, int(dimension[1] / 3) + 5, dimension[0], int(dimension[0] * dimension[1] / 15000) + 3))
     if (winnerSign == 0):
         winner = 0
-        screen.blit(render_border_winner("PLAYER 1 WON!", int(area / (area/80))),
+        screen.blit(render_border_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000)),
                     (int(dimension[0] / 11) + 2, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 1 WON!", int(area / (area/80)), 0),
+        screen.blit(render_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000), 0),
                     (int(dimension[0] / 11), int(dimension[1] / 3)))
     else:
         winner = 1
-        screen.blit(render_border_winner("PLAYER 2 WON!", int(area / (area/80))),
+        screen.blit(render_border_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000)),
                     (int(dimension[0] / 12) + 3, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 2 WON!", int(area / (area/80)), 1),
+        screen.blit(render_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000), 1),
                     (int(dimension[0] / 12), int(dimension[1] / 3)))
 
 
@@ -261,6 +260,7 @@ while running:
                     # print("======")
                     markingWithPlayer(playerChoose, clickedY, clickedX)
                     winner_checker()
+                    time.sleep(0.01)
     else:
         printWinner(winner)
         for event in pg.event.get():
