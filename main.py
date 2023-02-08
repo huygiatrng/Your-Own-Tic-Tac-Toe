@@ -2,11 +2,12 @@ import time
 
 import pygame as pg
 
-NUMBER_OF_ROWS = 20
-NUMBER_OF_COLUMNS = 20
-NUMBER_TO_WIN = 5
+NUMBER_OF_ROWS = 5
+NUMBER_OF_COLUMNS = 5
+NUMBER_TO_WIN = 3
 FPS = 144
-SIZE_OF_SINGLE_BOX = 60
+SIZE_OF_SINGLE_BOX = 100
+
 
 board2d = t = [[-1] * NUMBER_OF_COLUMNS for i in range(NUMBER_OF_ROWS)]
 
@@ -27,7 +28,7 @@ GRASS = (55, 155, 65)
 PINK = (204, 0, 102)
 
 dimension = (NUMBER_OF_COLUMNS * SIZE_OF_SINGLE_BOX + 20, NUMBER_OF_ROWS * SIZE_OF_SINGLE_BOX + 50)
-
+size_font = int(dimension[0] * dimension[1] / 15000)
 # initialize all imported pygame modules
 pg.init()
 # Set dimension
@@ -128,110 +129,36 @@ def printWinner(winnerSign):
                  (0, int(dimension[1] / 3) + 5, dimension[0], int(dimension[0] * dimension[1] / 15000) + 3))
     if (winnerSign == 0):
         winner = 0
-        screen.blit(render_border_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000)),
-                    (int(dimension[0] / 11) + 2, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 1 WON!", int(dimension[0] * dimension[1] / 15000), 0),
-                    (int(dimension[0] / 11), int(dimension[1] / 3)))
+        screen.blit(render_border_winner("PLAYER 1 WON!", size_font),
+                    (int(dimension[0]/2)-4*size_font + 2, int(dimension[1] / 2.9)+int(size_font/3) - 2))
+        screen.blit(render_winner("PLAYER 1 WON!", size_font, 0),
+                    (int(dimension[0]/2)-4*size_font , int(dimension[1] / 2.9)+int(size_font/3)))
     else:
         winner = 1
-        screen.blit(render_border_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000)),
-                    (int(dimension[0] / 12) + 3, int(dimension[1] / 3) - 2))
-        screen.blit(render_winner("PLAYER 2 WON!", int(dimension[0] * dimension[1] / 15000), 1),
-                    (int(dimension[0] / 12), int(dimension[1] / 3)))
-
+        screen.blit(render_border_winner("PLAYER 2 WON!", size_font),
+                    (int(dimension[0]/2)-4*size_font + 2, int(dimension[1] / 2.9)+int(size_font/3) - 2))
+        screen.blit(render_winner("PLAYER 2 WON!", size_font, 1),
+                    (int(dimension[0]/2)-4*size_font , int(dimension[1] / 2.9)+int(size_font/3)))
 
 def winner_checker():
-    # check diagonal left
     for i in range(0, NUMBER_OF_ROWS - NUMBER_TO_WIN + 1):
-        if gotWinner == False:
-            for j in range(0, NUMBER_OF_COLUMNS - NUMBER_TO_WIN + 1):
-                if gotWinner == False:
-                    if check_availability(board2d[i][j]) == False:
-                        counter = 0
-                        temp_y = i
-                        temp_x = j
-                        for g in range(0, NUMBER_TO_WIN - 1):
-                            if (board2d[temp_y][temp_x] == board2d[temp_y + 1][temp_x + 1]):
-                                temp_y += 1
-                                temp_x += 1
-                                counter += 1
-                                if (counter >= NUMBER_TO_WIN - 1):
-                                    printWinner(board2d[i][j])
-                                    break
-                            else:
-                                break
-                else:
-                    break
-        else:
-            break
-    # check diagonal right
-    for i in range(0, NUMBER_OF_ROWS - NUMBER_TO_WIN + 1):
-        if gotWinner == False:
-            for j in range(NUMBER_TO_WIN - 1, NUMBER_OF_COLUMNS):
-                if gotWinner == False:
-                    if check_availability(board2d[i][j]) == False:
-                        temp_y = i
-                        temp_x = j
-                        counter = 0
-                        for g in range(0, NUMBER_TO_WIN - 1):
-                            if (board2d[temp_y][temp_x] == board2d[temp_y + 1][temp_x - 1]):
-                                temp_y += 1
-                                temp_x -= 1
-                                counter += 1
-                                if (counter >= NUMBER_TO_WIN - 1):
-                                    printWinner(board2d[i][j])
-                                    break
-                            else:
-                                break
-                else:
-                    break
-        else:
-            break
-    # check vertical line
-    for i in range(0, NUMBER_OF_ROWS - NUMBER_TO_WIN + 1):
-        if gotWinner == False:
-            for j in range(0, NUMBER_OF_COLUMNS):
-                if gotWinner == False:
-                    if check_availability(board2d[i][j]) == False:
-                        temp_y = i
-                        temp_x = j
-                        counter = 0
-                        for g in range(0, NUMBER_TO_WIN - 1):
-                            if (board2d[temp_y][temp_x] == board2d[temp_y + 1][temp_x]):
-                                temp_y += 1
-                                counter += 1
-                                if (counter >= NUMBER_TO_WIN - 1):
-                                    printWinner(board2d[i][j])
-                                    break
-                            else:
-                                break
-                else:
-                    break
-        else:
-            break
-    # check horizontal line
-    for i in range(0, NUMBER_OF_ROWS):
-        if gotWinner == False:
-            for j in range(0, NUMBER_OF_COLUMNS - NUMBER_TO_WIN + 1):
-                if gotWinner == False:
-                    if check_availability(board2d[i][j]) == False:
-                        temp_y = i
-                        temp_x = j
-                        counter = 0
-                        for g in range(0, NUMBER_TO_WIN - 1):
-                            if (board2d[temp_y][temp_x] == board2d[temp_y][temp_x + 1]):
-                                temp_x += 1
-                                counter += 1
-                                if (counter >= NUMBER_TO_WIN - 1):
-                                    printWinner(board2d[i][j])
-                                    break
-                            else:
-                                break
-                else:
-                    break
-        else:
-            break
+        for j in range(0, NUMBER_OF_COLUMNS - NUMBER_TO_WIN + 1):
+            if check_availability(board2d[i][j]) == False:
+                if check_line(i, j, 1, 1) or check_line(i, j, 1, 0) or check_line(i, j, 0, 1) or check_line(i, j, 1, -1):
+                    printWinner(board2d[i][j])
+                    return
 
+def check_line(x, y, dx, dy):
+    temp_x = x
+    temp_y = y
+    counter = 0
+    for g in range(0, NUMBER_TO_WIN - 1):
+        temp_x += dx
+        temp_y += dy
+        if temp_x >= NUMBER_OF_ROWS or temp_y >= NUMBER_OF_COLUMNS or temp_x < 0 or temp_y < 0 or board2d[temp_x][temp_y] != board2d[x][y]:
+            return False
+        counter += 1
+    return counter >= NUMBER_TO_WIN - 1
 
 playerChoose = 0
 gotWinner = False
